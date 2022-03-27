@@ -57,7 +57,6 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // render results
-    //resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
 
     // render initial pagination buttons
@@ -121,7 +120,7 @@ const controlAddRecipe = async function (newRecipe) {
     bookmarksView.render(model.state.bookmarks);
 
     // Change ID in URL
-    // this method is suppose to change the URL without reloading the page pushState(state,title,url)
+    // this method is supposed to change the URL without reloading the page pushState(state,title,url)
     console.log('newRecipe id: ', model.state.recipe.id);
     window.history.pushState(null, '', `#${model.state.recipe.id}`);
 
@@ -135,12 +134,8 @@ const controlAddRecipe = async function (newRecipe) {
   }
 };
 
-const newFeature = function () {
-  console.log('Welcome to GIT');
-};
-
 const init = function () {
-  //  console.log('init() - welcome');
+  console.log('init()');
 
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
@@ -149,7 +144,5 @@ const init = function () {
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   addRecipeView.addHandlerUpload(controlAddRecipe);
-
-  newFeature();
 };
 init();
