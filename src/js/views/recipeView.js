@@ -8,8 +8,7 @@ class RecipeView extends View {
   _errorMessage = 'Recipe not found! Please, try another one.';
   _message = '';
   _servingsMsg = 'Servings are limited between 1 and 12!';
-  _overlayError = document.querySelector('.overlay-error');
-  _errorWindow = document.querySelector('.add-error-window');
+
   _btnCloseError = document.querySelector('.btn--close-modal-error');
 
   constructor() {
@@ -17,10 +16,10 @@ class RecipeView extends View {
     this._addHandlerHideWindow();
   }
 
-  toggleWindowError() {
-    this._overlayError.classList.toggle('hidden');
-    this._errorWindow.classList.toggle('hidden');
-  }
+  // toggleWindowError() {
+  //   this._overlayError.classList.toggle('hidden');
+  //   this._errorWindow.classList.toggle('hidden');
+  // }
 
   _addHandlerHideWindow() {
     this._overlayError.addEventListener(
@@ -49,7 +48,7 @@ class RecipeView extends View {
 
   servingsLimit() {
     this.toggleWindowError();
-    this.renderError(this._servingsMsg, this._errorWindow, false);
+    this.renderError(this._servingsMsg, this._errorWindow);
   }
 
   ///////////////////////////////////////////////////////////////////

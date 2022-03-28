@@ -104,37 +104,47 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newRecipe) {
   try {
-    // Show loading spinner
-    addRecipeView.renderSpinner();
-
-    // Upload new recipe data
     await model.uploadRecipe(newRecipe);
 
-    // Render recipe
+    // IDEA: implementar uma janela perguntando se quer add mais ingredientes
+
     recipeView.render(model.state.recipe);
 
-    // Success message
-    addRecipeView.renderMessage();
+    addRecipeView.toggleWindow();
+    addRecipeView.renderWindowMessage(
+      addRecipeView._messageSuccessRecipeAdd,
+      '_',
+      '_',
+      '_',
+      3
+    );
 
-    // Render bookmark view (render insert a new element)
     bookmarksView.render(model.state.bookmarks);
 
     // Change ID in URL
-    // this method is supposed to change the URL without reloading the page pushState(state,title,url)
+    // This method changes the URL without reloading the page pushState(state,title,url)
     console.log('newRecipe id: ', model.state.recipe.id);
     window.history.pushState(null, '', `#${model.state.recipe.id}`);
 
-    // Close form window
-    setTimeout(function () {
-      addRecipeView.toggleWindow();
-    }, MODAL_CLOSE_SEC * 1000);
+    //Close form window
+    // setTimeout(function () {
+    //   addRecipeView.toggleWindow();
+    // }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
     console.error('🎇', err);
-    addRecipeView.renderError(err.message);
+
+    addRecipeView.renderWindowMessage(
+      addRecipeView._messageWrongIngFormat,
+      '_',
+      '_',
+      'alert-triangle',
+      4
+    );
   }
 };
 
 const init = function () {
+  // Check its loading in real-time
   console.log('init()');
 
   bookmarksView.addHandlerRender(controlBookmarks);

@@ -55,7 +55,7 @@
               </button>
               <div class="bookmarks">
                 <ul class="bookmarks__list">
-                  <div class="message">
+                  <!--<div class="message">
                     <div>
                       <svg>
                         <use href="src/img/icons.svg#icon-smile"></use>
@@ -64,7 +64,7 @@
                     <p>
                       No bookmarks yet. Find a nice recipe and bookmark it :)
                     </p>
-                  </div>
+                  </div> -->
 
                   <!-- <li class="preview">
                     <a class="preview__link" href="#23456">
@@ -128,16 +128,22 @@
             <p class="current-page">Current page: 3</p>
           </div> -->
         </div>
-        <!-- <p class="copyright">
-            &copy; Copyright by
-            <a
-              class="twitter-link"
-              target="_blank"
-              href="https://twitter.com/jonasschmedtman"
-              >Jonas Schmedtmann</a
-            >. Use for learning or your portfolio. Don't use to teach. Don't claim
-            as your own.
-          </p> -->
+        <p class="copyright">
+          Developer:           <a
+          class="twitter-link github-link"
+          target="_blank"
+          href="https://github.com/englconti"
+          >Leonardo Conti</a
+        >. </br>Project developed during course: "The
+          Complete JavaScript Course 2022: From Zero to Expert!"</br> &copy;
+          Copyright by
+          <a
+            class="twitter-link"
+            target="_blank"
+            href="https://twitter.com/jonasschmedtman"
+            >Jonas Schmedtmann</a
+          >.
+        </p>
       </div>
 
       <div class="recipe">
@@ -263,8 +269,7 @@
       </div>
     </div>
 
-    <div class="overlay-error hidden"></div>
-    <div class="add-error-window hidden"></div>
+ 
 
     <div class="overlay hidden"></div>
     <div class="add-recipe-window hidden">
@@ -273,16 +278,16 @@
         <div class="upload__column">
           <h3 class="upload__heading">Recipe data</h3>
           <label>Title</label>
-          <input value="TESTANDO" required name="title" type="text" />
+          <input placeholder="Input recipe's title" value="TESTANDO" required name="title" type="text" />
           <label>URL</label>
-          <input value="TESTANDO" required name="sourceUrl" type="text" />
+          <input placeholder="Input source URL" value="TESTANDO" required name="sourceUrl" type="text" />
           <label>Image URL</label>
-          <input value="TESTANDO" required name="image" type="text" />
+          <input placeholder="Input recipe image URL" value="TESTANDO" required name="image" type="text" />
           <label>Publisher</label>
-          <input value="TESTANDO" required name="publisher" type="text" />
+          <input placeholder="Type publisher name" value="TESTANDO" required name="publisher" type="text" />
           <label>Prep time</label>
           <input
-            placeholder="Time in minutes (e.g. 30)"
+            placeholder="Time in minutes (e.g. 30)" value="30"
             required
             name="cookingTime"
             type="number"
@@ -290,7 +295,7 @@
           <label>Servings</label>
           <input
             value="4"
-            placeholder="Number of servings (from 1 to 20)"
+            placeholder="Number of servings (from 1 to 12)"
             required
             name="servings"
             type="number"
@@ -349,5 +354,12 @@
         </button>
       </form>
     </div>
+    <div class="overlay-error hidden"></div>
+    <div class="add-error-window hidden"></div>
+    
+    <div class="overlay-window-message hidden"></div>
+    <div class="add-window-message hidden"></div>
+
+
   </body>
 </html>

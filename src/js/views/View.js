@@ -3,7 +3,13 @@ import icons from 'url:../../img/icons.svg';
 // Top parent class
 export default class View {
   _data;
-  _overlay = document.querySelector('.overlay');
+  _errorWindow = document.querySelector('.add-error-window');
+  _overlayError = document.querySelector('.overlay-error');
+
+  // Any message
+  _overlayWindowMessage = document.querySelector('.overlay-window-message');
+  _windowMessage = document.querySelector('.add-window-message');
+
   /**
    * Render the received object to the DOM
    * @param {Object | Object[]} data The data to be rendered(e.g. recipe)
@@ -18,7 +24,6 @@ export default class View {
       return this.renderError();
 
     this._data = data;
-    console.log(data);
     const markup = this._generateMarkup();
 
     if (!render) return markup;
@@ -63,15 +68,15 @@ export default class View {
     });
   }
 
-  renderSpinner() {
+  renderSpinner(parent = this._parentElement) {
     const markup = `
       <div class="spinner">
         <svg>
           <use href="${icons}#icon-loader"></use>
         </svg>
       </div>`;
-    this._parentElement.innerHTML = '';
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    parent.innerHTML = '';
+    parent.insertAdjacentHTML('afterbegin', markup);
   }
 
   renderError(
@@ -79,7 +84,11 @@ export default class View {
     parent = this._parentElement,
     clear = true
   ) {
-    if (!clear) parent.innerHTML = '';
+    message === '_' ? (message = this._message) : '';
+    parent === '_' ? (parent = this._parentElement) : '';
+    clear === '_' ? (clear = true) : '';
+
+    if (clear) this._clear(parent);
     const markup = `
     <div class="error">
         <div>
@@ -89,22 +98,80 @@ export default class View {
         </div>
         <p>${message}</p>
     </div>`;
-    if (clear) this._clear();
     parent.insertAdjacentHTML('afterbegin', markup);
   }
 
-  renderMessage(message = this._message, parent = this._parentElement) {
+  renderMessage(
+    message = this._message,
+    parent = this._parentElement,
+    clear = true,
+    icon = 'smile'
+  ) {
+    message === '_' ? (message = this._message) : '';
+    parent === '_' ? (parent = this._parentElement) : '';
+    clear === '_' ? (clear = true) : '';
+    icon === '_' ? (icon = 'smile') : '';
+
+    if (clear) this._clear(parent);
     const markup = `
     <div class="message">
         <div>
         <svg>
-            <use href="${icons}#icon-smile"></use>
+            <use href="${icons}#icon-${icon}"></use>
         </svg>
         </div>
         <p>${message}</p>
     </div>`;
-    this._clear();
     parent.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  /**
+   * Render a window message for any reason
+   * @param {string} message message to appear in the window
+   * @param {DOM element} [parent=document.querySelector('.add-window-message')] container to render the msg
+   * @param {boolean} [clear=true] clear previous content from parent
+   * @param {string} [icon='smile'] icon to be shown (smile, alert-circle, alert-triangle, arrow-left, arrow-right, loader )
+   * @param {number | boolean} [timeOut=false] to set a timeOut input a number of seconds (e.g. 3)
+   * @returns nothing
+   * @this {Object} View instance that is calling
+   * @author Leonardo Conti
+   */
+  renderWindowMessage(
+    message,
+    parent = this._windowMessage,
+    clear = true,
+    icon = 'smile',
+    timeOut = false
+  ) {
+    message === '_' ? (message = this._message) : '';
+    parent === '_' ? (parent = this._windowMessage) : '';
+    clear === '_' ? (clear = true) : '';
+    icon === '_' ? (icon = 'smile') : '';
+    timeOut === '_' ? (timeOut = false) : '';
+
+    if (clear) this._clear(parent);
+    const markup = `
+    <div class="message">
+        <div>
+        <svg>
+            <use href="${icons}#icon-${icon}"></use>
+        </svg>
+        </div>
+        <p>${message}</p>
+    </div>`;
+    parent.insertAdjacentHTML('afterbegin', markup);
+
+    this.toggleWindowMessage(timeOut);
+  }
+
+  toggleWindowMessage(timeOut = false) {
+    this._overlayWindowMessage.classList.toggle('hidden');
+    this._windowMessage.classList.toggle('hidden');
+
+    if (!this._overlayWindowMessage.classList.contains('hidden') && timeOut)
+      setTimeout(() => {
+        this.toggleWindowMessage();
+      }, timeOut * 1000);
   }
 
   toggleWindow() {
@@ -112,8 +179,12 @@ export default class View {
     this._window.classList.toggle('hidden');
   }
 
-  // private functions
-  _clear() {
-    this._parentElement.innerHTML = '';
+  toggleWindowError() {
+    this._overlayError.classList.toggle('hidden');
+    this._errorWindow.classList.toggle('hidden');
+  }
+
+  _clear(parent = this._parentElement) {
+    parent.innerHTML = '';
   }
 }
