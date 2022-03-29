@@ -22,9 +22,11 @@
   &__btn {
     &--prev {
       float: left;
+      box-shadow: -2px 2px 2px rgb(94, 85, 85);
     }
     &--next {
       float: right;
+      box-shadow: 2px 2px 2px rgb(94, 85, 85);
     }
   }
 
@@ -32,7 +34,8 @@
     position: relative;
     font-size: 20px;
     color: rgb(255, 255, 255);
-    background-color: rgb(243, 97, 30);
+    background-color: rgb(#e83a14, 0.6);
+    box-shadow: 0px 0px 10px rgb(75, 70, 70);
     margin-left: 80px;
     margin-right: 80px;
     margin-top: 60px;

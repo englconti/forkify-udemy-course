@@ -22,22 +22,23 @@ const controlRecipes = async function () {
 
     // guard clause-early return
     if (!id) return;
+
+    // 0) Render loading spinner
     recipeView.renderSpinner();
 
-    // 0) Update results view to mark selected search result
+    // 1) Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
 
-    // 0.5) Update bookmarks based on local storage
+    // 2) Update bookmarks based on local storage
     bookmarksView.update(model.state.bookmarks);
 
-    // 1) Loading recipe
+    // 3) Loading recipe
     await model.loadRecipe(id); // await is necessary bc loadRecipe returns a promise
 
-    // 2) Rendering recipe on screen
+    // 4) Rendering recipe on screen
     recipeView.render(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
-    //console.error(err);
   }
 };
 

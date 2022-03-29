@@ -1,7 +1,7 @@
 // $color-primary: #f59a83;
-$color-primary: #f38e82;
-$color-grad-1: #fbdb89;
-$color-grad-2: #f48982;
+$color-primary: #630606;
+$color-grad-1: #d9ce3f;
+$color-grad-2: #e83a14;
 
 $color-grey-light-1: #f9f5f3; // Light background
 $color-grey-light-2: #f2efee; // Light lines
@@ -54,7 +54,7 @@ body {
   background-color: #fff;
   border-radius: 9px;
   overflow: hidden;
-  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
+  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.5);
 
   display: grid;
   grid-template-rows: 10rem minmax(100rem, auto);

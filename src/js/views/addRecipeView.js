@@ -16,7 +16,7 @@ class AddRecipeView extends View {
     this._addHandlerHideWindow();
 
     // Clear all template inputs in ADD RECIPE
-    this._clearValues();
+    // this._clearValues();
   }
 
   _addHandlerShowWindow() {
