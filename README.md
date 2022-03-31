@@ -12,3 +12,5 @@ My commits and personal implementations in the project are:
 
 - Error message window trying to add/reduce more servings than the allowed values (1 and 20).
 - Current Page and maximum number of pages display at the pagination.
+- Error window when trying to input wrong ingredients format on Add Recipe.
+- Succefull message window when uploading a new recipe.
